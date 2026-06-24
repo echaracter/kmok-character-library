@@ -433,7 +433,7 @@ const BASE_URL = 'https://echaracter.github.io/kmok-character-library/';
 // ===== 状態管理 =====
 let allImages = [];
 let currentCategory = 'すべて';
-let currentTag = 'すべて';
+let selectedTags = new Set();
 
 // ===== 画像データを読み込む =====
 async function loadData() {
@@ -486,9 +486,23 @@ function setCategory(cat, btn) {
 
 // ===== タグボタン =====
 function setTag(tag, btn) {
-  currentTag = tag;
-  document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if (tag === 'すべて') {
+    selectedTags.clear();
+    document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  } else {
+    document.querySelector('.tag-btn[onclick="setTag(\'すべて\', this)"]').classList.remove('active');
+    if (selectedTags.has(tag)) {
+      selectedTags.delete(tag);
+      btn.classList.remove('active');
+    } else {
+      selectedTags.add(tag);
+      btn.classList.add('active');
+    }
+    if (selectedTags.size === 0) {
+      document.querySelector('.tag-btn[onclick="setTag(\'すべて\', this)"]').classList.add('active');
+    }
+  }
   applyFilters();
 }
 
@@ -498,7 +512,7 @@ function applyFilters() {
 
   const filtered = allImages.filter(img => {
     const matchCat = currentCategory === 'すべて' || img.category === currentCategory;
-    const matchTag = currentTag === 'すべて' || img.tags.includes(currentTag);
+    const matchTag = selectedTags.size === 0 || [...selectedTags].every(t => img.tags.includes(t));
     const matchKeyword = !keyword ||
       img.title.toLowerCase().includes(keyword) ||
       img.category.toLowerCase().includes(keyword) ||
