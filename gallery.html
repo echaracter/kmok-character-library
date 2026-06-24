@@ -5,356 +5,235 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>キャラクター素材ライブラリ</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-    background: #f7f5f0;
-    color: #2c2a26;
-    min-height: 100vh;
-  }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+  background: #f7f5f0;
+  color: #2c2a26;
+  min-height: 100vh;
+}
 
-  /* ヘッダー */
-  header {
-    background: #ffffff;
-    border-bottom: 1px solid #e0ddd6;
-    padding: 1.2rem 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  header h1 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #2c2a26;
-    letter-spacing: 0.03em;
-    flex: 1 1 auto;
-  }
-  header a {
-    font-size: 0.85rem;
-    color: #888;
-    text-decoration: none;
-  }
-  header a:hover { color: #3B6D11; }
+header {
+  background: #ffffff;
+  border-bottom: 1px solid #e0ddd6;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+header h1 { font-size: 1.25rem; font-weight: 700; flex: 1 1 auto; }
+header a { font-size: 0.85rem; color: #888; text-decoration: none; }
+header a:hover { color: #3B6D11; }
 
-  /* 検索・フィルターエリア */
-  .controls {
-    background: #ffffff;
-    border-bottom: 1px solid #e0ddd6;
-    padding: 1rem 2rem;
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+.controls {
+  background: #ffffff;
+  border-bottom: 1px solid #e0ddd6;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
-  .search-box {
-    display: flex;
-    align-items: center;
-    background: #f7f5f0;
-    border: 1px solid #d0cdc6;
-    border-radius: 8px;
-    padding: 0.45rem 0.8rem;
-    gap: 0.5rem;
-    flex: 1 1 200px;
-    min-width: 0;
-  }
-  .search-box input {
-    border: none;
-    background: transparent;
-    font-size: 0.9rem;
-    color: #2c2a26;
-    outline: none;
-    width: 100%;
-    font-family: inherit;
-  }
-  .search-box input::placeholder { color: #aaa; }
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f7f5f0;
+  border: 1px solid #d0cdc6;
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  gap: 0.5rem;
+  flex: 1 1 200px;
+}
+.search-box input {
+  border: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #2c2a26;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+}
+.search-box input::placeholder { color: #aaa; }
 
-  .filter-btn {
-    background: #f7f5f0;
-    border: 1px solid #d0cdc6;
-    border-radius: 20px;
-    padding: 0.4rem 1rem;
-    font-size: 0.82rem;
-    cursor: pointer;
-    color: #555;
-    font-family: inherit;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-  .filter-btn:hover { border-color: #3B6D11; color: #3B6D11; }
-  .filter-btn.active {
-    background: #3B6D11;
-    border-color: #3B6D11;
-    color: #ffffff;
-    font-weight: 600;
-  }
+.filter-btn {
+  background: #f7f5f0;
+  border: 1px solid #d0cdc6;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: #555;
+  font-family: inherit;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: #3B6D11; color: #3B6D11; }
+.filter-btn.active { background: #3B6D11; border-color: #3B6D11; color: #fff; font-weight: 600; }
 
-  /* タグフィルターエリア */
-  .tag-filters {
-    background: #faf9f6;
-    border-bottom: none;
-    padding: 0.4rem 2rem;
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .tag-filters:last-of-type {
-    border-bottom: 1px solid #e0ddd6;
-    padding-bottom: 0.6rem;
-  }
-  .tag-label {
-    font-size: 0.78rem;
-    color: #888;
-    margin-right: 0.25rem;
-    white-space: nowrap;
-  }
-  .tag-btn {
-    background: transparent;
-    border: 1px solid #c8c5be;
-    border-radius: 20px;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.78rem;
-    cursor: pointer;
-    color: #666;
-    font-family: inherit;
-    transition: all 0.15s;
-  }
-  .tag-btn:hover { border-color: #639922; color: #3B6D11; }
-  .tag-btn.active {
-    background: #EAF3DE;
-    border-color: #639922;
-    color: #3B6D11;
-    font-weight: 600;
-  }
+.tag-section {
+  background: #faf9f6;
+  border-bottom: 1px solid #e0ddd6;
+  padding: 0.5rem 2rem;
+}
+.tag-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0.3rem 0;
+}
+.tag-label { font-size: 0.78rem; color: #888; white-space: nowrap; min-width: 70px; }
 
-  /* 件数表示 */
-  .result-info {
-    padding: 0.6rem 2rem;
-    font-size: 0.8rem;
-    color: #888;
-  }
+.tag-btn {
+  background: transparent;
+  border: 1px solid #c8c5be;
+  border-radius: 20px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  color: #666;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.tag-btn:hover { border-color: #639922; color: #3B6D11; }
+.tag-btn.active { background: #EAF3DE; border-color: #639922; color: #3B6D11; font-weight: 600; }
 
-  /* ギャラリーグリッド */
-  .gallery {
-    padding: 1rem 2rem 3rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.25rem;
-  }
+.active-filter-bar {
+  display: none;
+  background: #fff8e6;
+  border-bottom: 1px solid #e0ddd6;
+  padding: 0.5rem 2rem;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.active-filter-bar span.label { font-size: 0.78rem; color: #888; }
+.active-chip {
+  background: #EAF3DE;
+  color: #3B6D11;
+  border-radius: 10px;
+  padding: 0.15rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.clear-btn {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid #d0cdc6;
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.78rem;
+  color: #888;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.clear-btn:hover { border-color: #c0392b; color: #c0392b; }
 
-  /* カード */
-  .card {
-    background: #ffffff;
-    border: 1px solid #e0ddd6;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-  }
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    border-color: #aed97a;
-  }
+.result-info { padding: 0.6rem 2rem; font-size: 0.8rem; color: #888; }
 
-  .card-img {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background: #f0ede6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: 0.5rem;
-  }
-  .card-img .no-img {
-    color: #bbb;
-    font-size: 0.75rem;
-  }
+.gallery {
+  padding: 1rem 2rem 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
 
-  .card-body {
-    padding: 0.7rem 0.85rem 0.85rem;
-  }
-  .card-title {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: #2c2a26;
-    margin-bottom: 0.35rem;
-    line-height: 1.3;
-  }
-  .card-category {
-    font-size: 0.72rem;
-    color: #888;
-    margin-bottom: 0.45rem;
-  }
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-  }
-  .card-tag {
-    background: #EAF3DE;
-    color: #3B6D11;
-    border-radius: 10px;
-    padding: 0.15rem 0.55rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-  }
-  .card-tag.boy { background: #E6F1FB; color: #185FA5; }
-  .card-tag.girl { background: #FBEAF0; color: #993556; }
+.card {
+  background: #fff;
+  border: 1px solid #e0ddd6;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); border-color: #aed97a; }
 
-  /* モーダル */
-  .modal-bg {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-  }
-  .modal-bg.open { display: flex; }
+.card-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #f0ede6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.card-img img { width: 100%; height: 100%; object-fit: contain; padding: 0.5rem; }
 
-  .modal {
-    background: #fff;
-    border-radius: 16px;
-    max-width: 540px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  }
+.card-body { padding: 0.7rem 0.85rem 0.85rem; }
+.card-title { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.35rem; line-height: 1.3; }
+.card-category { font-size: 0.72rem; color: #888; margin-bottom: 0.45rem; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.card-tag { background: #EAF3DE; color: #3B6D11; border-radius: 10px; padding: 0.15rem 0.55rem; font-size: 0.7rem; font-weight: 600; }
+.card-tag.boy { background: #E6F1FB; color: #185FA5; }
+.card-tag.girl { background: #FBEAF0; color: #993556; }
 
-  .modal-img-wrap {
-    background: #f0ede6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    border-radius: 16px 16px 0 0;
-    min-height: 260px;
-  }
-  .modal-img-wrap img {
-    max-width: 100%;
-    max-height: 300px;
-    object-fit: contain;
-  }
+.modal-bg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal-bg.open { display: flex; }
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 540px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.modal-img-wrap {
+  background: #f0ede6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: 16px 16px 0 0;
+  min-height: 260px;
+}
+.modal-img-wrap img { max-width: 100%; max-height: 300px; object-fit: contain; }
+.modal-body { padding: 1.25rem 1.5rem 1.5rem; }
+.modal-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
+.modal-meta { font-size: 0.82rem; color: #888; margin-bottom: 0.7rem; }
+.modal-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.2rem; }
+.modal-tag { background: #EAF3DE; color: #3B6D11; border-radius: 10px; padding: 0.2rem 0.65rem; font-size: 0.75rem; font-weight: 600; }
+.modal-tag.boy { background: #E6F1FB; color: #185FA5; }
+.modal-tag.girl { background: #FBEAF0; color: #993556; }
+.dl-label { font-size: 0.78rem; color: #888; margin-bottom: 0.5rem; font-weight: 600; letter-spacing: 0.05em; }
+.dl-buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+.dl-btn {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.65rem 1.2rem; border-radius: 8px; font-size: 0.88rem; font-weight: 600;
+  font-family: inherit; cursor: pointer; text-decoration: none; border: 2px solid transparent; transition: all 0.15s;
+}
+.dl-btn-png { background: #3B6D11; color: #fff; }
+.dl-btn-png:hover { background: #27500A; }
+.dl-btn-pdf { background: transparent; border-color: #d0cdc6; color: #555; }
+.dl-btn-pdf:hover { border-color: #3B6D11; color: #3B6D11; }
+.dl-btn-icon { width: 18px; height: 18px; fill: currentColor; }
+.modal-close-btn {
+  display: block; width: 100%; padding: 0.6rem;
+  background: transparent; border: 1px solid #e0ddd6; border-radius: 8px;
+  font-size: 0.85rem; color: #888; cursor: pointer; font-family: inherit; transition: background 0.15s;
+}
+.modal-close-btn:hover { background: #f7f5f0; }
+.empty { grid-column: 1/-1; text-align: center; padding: 4rem 1rem; color: #aaa; font-size: 0.9rem; }
 
-  .modal-body {
-    padding: 1.25rem 1.5rem 1.5rem;
-  }
-  .modal-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.3rem;
-  }
-  .modal-meta {
-    font-size: 0.82rem;
-    color: #888;
-    margin-bottom: 0.7rem;
-  }
-  .modal-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    margin-bottom: 1.2rem;
-  }
-  .modal-tag {
-    background: #EAF3DE;
-    color: #3B6D11;
-    border-radius: 10px;
-    padding: 0.2rem 0.65rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-  }
-  .modal-tag.boy { background: #E6F1FB; color: #185FA5; }
-  .modal-tag.girl { background: #FBEAF0; color: #993556; }
-
-  .dl-label {
-    font-size: 0.78rem;
-    color: #888;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-  .dl-buttons {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.9rem;
-  }
-  .dl-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.65rem 1.2rem;
-    border-radius: 8px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-    text-decoration: none;
-    border: 2px solid transparent;
-    transition: all 0.15s;
-  }
-  .dl-btn-png {
-    background: #3B6D11;
-    color: #fff;
-  }
-  .dl-btn-png:hover { background: #27500A; }
-
-  .dl-btn-pdf {
-    background: transparent;
-    border-color: #d0cdc6;
-    color: #555;
-  }
-  .dl-btn-pdf:hover { border-color: #3B6D11; color: #3B6D11; }
-
-  .dl-btn-icon {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-  }
-
-  .modal-close-btn {
-    display: block;
-    width: 100%;
-    padding: 0.6rem;
-    background: transparent;
-    border: 1px solid #e0ddd6;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    color: #888;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.15s;
-  }
-  .modal-close-btn:hover { background: #f7f5f0; }
-
-  /* 空の状態 */
-  .empty {
-    grid-column: 1/-1;
-    text-align: center;
-    padding: 4rem 1rem;
-    color: #aaa;
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 600px) {
-    .controls, .tag-filters, .result-info, .gallery { padding-left: 1rem; padding-right: 1rem; }
-    header { padding: 1rem; }
-    .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
-  }
+@media (max-width: 600px) {
+  .controls, .tag-section, .result-info, .gallery, .active-filter-bar { padding-left: 1rem; padding-right: 1rem; }
+  header { padding: 1rem; }
+  .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
+}
 </style>
 </head>
 <body>
@@ -364,7 +243,6 @@
   <a href="index.html">← トップへ戻る</a>
 </header>
 
-<!-- カテゴリー + フリーワード検索 -->
 <div class="controls">
   <div class="search-box">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -377,44 +255,43 @@
   <button class="filter-btn" onclick="setCategory('テーマ', this)">テーマ</button>
 </div>
 
-<!-- タグ検索 -->
-<div class="tag-filters">
-  <span class="tag-label">キャラクター：</span>
-  <button id="tagAll" class="tag-btn active" onclick="setTag('すべて', this)">すべて</button>
-  <button class="tag-btn" onclick="setTag('男の子', this)">男の子</button>
-  <button class="tag-btn" onclick="setTag('女の子', this)">女の子</button>
-  <button class="tag-btn" onclick="setTag('ふたり', this)">ふたり</button>
-  <button class="tag-btn" onclick="setTag('その他', this)">その他</button>
-</div>
-<div class="tag-filters">
-  <span class="tag-label">季節・場面：</span>
-  <button class="tag-btn" onclick="setTag('春', this)">春</button>
-  <button class="tag-btn" onclick="setTag('夏', this)">夏</button>
-  <button class="tag-btn" onclick="setTag('秋', this)">秋</button>
-  <button class="tag-btn" onclick="setTag('冬', this)">冬</button>
-  <button class="tag-btn" onclick="setTag('給食', this)">給食</button>
-  <button class="tag-btn" onclick="setTag('体育', this)">体育</button>
-</div>
-<div class="tag-filters">
-  <span class="tag-label">種類：</span>
-  <button class="tag-btn" onclick="setTag('標準', this)">標準</button>
-  <button class="tag-btn" onclick="setTag('動き', this)">動き</button>
-  <button class="tag-btn" onclick="setTag('線画', this)">線画</button>
+<div class="tag-section">
+  <div class="tag-row">
+    <span class="tag-label">キャラクター：</span>
+    <button id="tagAll" class="tag-btn active" onclick="setTag('すべて', this)">すべて</button>
+    <button class="tag-btn" onclick="setTag('男の子', this)">男の子</button>
+    <button class="tag-btn" onclick="setTag('女の子', this)">女の子</button>
+    <button class="tag-btn" onclick="setTag('ふたり', this)">ふたり</button>
+    <button class="tag-btn" onclick="setTag('その他', this)">その他</button>
+  </div>
+  <div class="tag-row">
+    <span class="tag-label">季節・場面：</span>
+    <button class="tag-btn" onclick="setTag('春', this)">春</button>
+    <button class="tag-btn" onclick="setTag('夏', this)">夏</button>
+    <button class="tag-btn" onclick="setTag('秋', this)">秋</button>
+    <button class="tag-btn" onclick="setTag('冬', this)">冬</button>
+    <button class="tag-btn" onclick="setTag('給食', this)">給食</button>
+    <button class="tag-btn" onclick="setTag('体育', this)">体育</button>
+  </div>
+  <div class="tag-row">
+    <span class="tag-label">種類：</span>
+    <button class="tag-btn" onclick="setTag('標準', this)">標準</button>
+    <button class="tag-btn" onclick="setTag('動き', this)">動き</button>
+    <button class="tag-btn" onclick="setTag('線画', this)">線画</button>
+  </div>
 </div>
 
-<div class="active-filters" id="activeFilters" style="display:none; padding: 0.5rem 2rem; background:#faf9f6; border-bottom:1px solid #e0ddd6; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
-  <span style="font-size:0.78rem; color:#888;">絞り込み中：</span>
-  <span id="activeFilterTags" style="display:flex; gap:0.4rem; flex-wrap:wrap;"></span>
-  <button onclick="clearAllFilters()" style="margin-left:auto; background:transparent; border:1px solid #d0cdc6; border-radius:20px; padding:0.3rem 0.9rem; font-size:0.78rem; color:#888; cursor:pointer;">すべてクリア</button>
+<div class="active-filter-bar" id="activeFilterBar">
+  <span class="label">絞り込み中：</span>
+  <span id="activeChips"></span>
+  <button class="clear-btn" onclick="clearAllFilters()">✕ フィルターをすべて解除</button>
 </div>
+
 <div class="result-info" id="resultInfo"></div>
-
-<!-- ギャラリーグリッド -->
 <div class="gallery" id="gallery"></div>
 
-<!-- モーダル -->
 <div class="modal-bg" id="modalBg" onclick="closeModal(event)">
-  <div class="modal" id="modal">
+  <div class="modal">
     <div class="modal-img-wrap">
       <img id="modalImg" src="" alt="">
     </div>
@@ -430,47 +307,54 @@
 </div>
 
 <script>
-const BASE_URL = 'https://echaracter.github.io/kmok-character-library/';
+var BASE_URL = 'https://echaracter.github.io/kmok-character-library/';
+var allImages = [];
+var currentCategory = 'すべて';
+var selectedTags = [];
 
-let allImages = [];
-let currentCategory = 'すべて';
-let selectedTags = new Set();
-
-async function loadData() {
-  try {
-    const res = await fetch(BASE_URL + 'data/images.json');
-    allImages = await res.json();
-  } catch (e) {
-    allImages = [
-      {"id":"A-1-B01","file":"images/A-1-B01.png","title":"標準ポーズ 男の子01","category":"標準ポーズ","tags":["男の子","立ち","標準"]},
-      {"id":"A-1-G01","file":"images/A-1-G01.png","title":"標準ポーズ 女の子01","category":"標準ポーズ","tags":["女の子","立ち","標準"]}
-    ];
-  }
-  applyFilters();
+function loadData() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', BASE_URL + 'data/images.json', true);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      allImages = JSON.parse(xhr.responseText);
+    } else {
+      allImages = [];
+    }
+    applyFilters();
+  };
+  xhr.onerror = function() {
+    allImages = [];
+    applyFilters();
+  };
+  xhr.send();
 }
 
 function setCategory(cat, btn) {
   currentCategory = cat;
-  document.querySelectorAll('.controls .filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  var btns = document.querySelectorAll('.controls .filter-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
   btn.classList.add('active');
   applyFilters();
 }
 
 function setTag(tag, btn) {
   if (tag === 'すべて') {
-    selectedTags.clear();
-    document.querySelectorAll('.tag-btn').forEach(function(b) { b.classList.remove('active'); });
+    selectedTags = [];
+    var allBtns = document.querySelectorAll('.tag-btn');
+    for (var i = 0; i < allBtns.length; i++) allBtns[i].classList.remove('active');
     btn.classList.add('active');
   } else {
     document.getElementById('tagAll').classList.remove('active');
-    if (selectedTags.has(tag)) {
-      selectedTags.delete(tag);
+    var idx = selectedTags.indexOf(tag);
+    if (idx >= 0) {
+      selectedTags.splice(idx, 1);
       btn.classList.remove('active');
     } else {
-      selectedTags.add(tag);
+      selectedTags.push(tag);
       btn.classList.add('active');
     }
-    if (selectedTags.size === 0) {
+    if (selectedTags.length === 0) {
       document.getElementById('tagAll').classList.add('active');
     }
   }
@@ -478,50 +362,65 @@ function setTag(tag, btn) {
 }
 
 function clearAllFilters() {
-  selectedTags.clear();
   currentCategory = 'すべて';
-  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.getElementById('catAll').classList.add('active');
-  document.querySelectorAll('.tag-btn').forEach(function(b) { b.classList.remove('active'); });
-  document.getElementById('tagAll').classList.add('active');
+  selectedTags = [];
   document.getElementById('searchInput').value = '';
+  var catBtns = document.querySelectorAll('.filter-btn');
+  for (var i = 0; i < catBtns.length; i++) catBtns[i].classList.remove('active');
+  document.getElementById('catAll').classList.add('active');
+  var tagBtns = document.querySelectorAll('.tag-btn');
+  for (var i = 0; i < tagBtns.length; i++) tagBtns[i].classList.remove('active');
+  document.getElementById('tagAll').classList.add('active');
   applyFilters();
 }
 
-function updateActiveFilters() {
-  var bar = document.getElementById('activeFilters');
-  var tagsEl = document.getElementById('activeFilterTags');
-  var chips = [];
-  if (currentCategory !== 'すべて') chips.push(currentCategory);
-  selectedTags.forEach(function(t) { chips.push(t); });
+function updateActiveFilterBar() {
+  var bar = document.getElementById('activeFilterBar');
+  var chips = document.getElementById('activeChips');
+  var items = [];
+  if (currentCategory !== 'すべて') items.push(currentCategory);
+  for (var i = 0; i < selectedTags.length; i++) items.push(selectedTags[i]);
   var kw = document.getElementById('searchInput').value.trim();
-  if (kw) chips.push('「' + kw + '」');
+  if (kw) items.push('「' + kw + '」');
 
-  if (chips.length === 0) {
+  if (items.length === 0) {
     bar.style.display = 'none';
     return;
   }
   bar.style.display = 'flex';
-  tagsEl.innerHTML = chips.map(function(c) {
-    return '<span style="background:#EAF3DE;color:#3B6D11;border-radius:10px;padding:0.15rem 0.65rem;font-size:0.75rem;font-weight:600;">' + c + '</span>';
-  }).join('');
+  var html = '';
+  for (var i = 0; i < items.length; i++) {
+    html += '<span class="active-chip">' + items[i] + '</span> ';
+  }
+  chips.innerHTML = html;
 }
 
 function applyFilters() {
   var keyword = document.getElementById('searchInput').value.trim().toLowerCase();
-
-  var filtered = allImages.filter(function(img) {
-    var matchCat = currentCategory === 'すべて' || img.category === currentCategory;
-    var matchTag = selectedTags.size === 0 || Array.from(selectedTags).every(function(t) { return img.tags.includes(t); });
-    var matchKeyword = !keyword ||
-      img.title.toLowerCase().includes(keyword) ||
-      img.category.toLowerCase().includes(keyword) ||
-      img.tags.some(function(t) { return t.toLowerCase().includes(keyword); });
-    return matchCat && matchTag && matchKeyword;
-  });
-
+  var filtered = [];
+  for (var i = 0; i < allImages.length; i++) {
+    var img = allImages[i];
+    var matchCat = (currentCategory === 'すべて' || img.category === currentCategory);
+    var matchTag = true;
+    if (selectedTags.length > 0) {
+      for (var j = 0; j < selectedTags.length; j++) {
+        if (img.tags.indexOf(selectedTags[j]) < 0) { matchTag = false; break; }
+      }
+    }
+    var matchKw = true;
+    if (keyword) {
+      matchKw = img.title.toLowerCase().indexOf(keyword) >= 0 ||
+                img.category.toLowerCase().indexOf(keyword) >= 0;
+      if (!matchKw) {
+        for (var k = 0; k < img.tags.length; k++) {
+          if (img.tags[k].toLowerCase().indexOf(keyword) >= 0) { matchKw = true; break; }
+        }
+      }
+    }
+    if (matchCat && matchTag && matchKw) filtered.push(img);
+  }
   renderGallery(filtered);
-  updateActiveFilters();
+  updateActiveFilterBar();
   document.getElementById('resultInfo').textContent = filtered.length + '件 表示中（全' + allImages.length + '件）';
 }
 
@@ -531,28 +430,33 @@ function renderGallery(images) {
     gallery.innerHTML = '<div class="empty">該当する素材が見つかりませんでした。</div>';
     return;
   }
-  gallery.innerHTML = images.map(function(img) {
-    var tagHtml = img.tags.map(function(t) {
+  var html = '';
+  for (var i = 0; i < images.length; i++) {
+    var img = images[i];
+    var tagHtml = '';
+    for (var j = 0; j < img.tags.length; j++) {
+      var t = img.tags[j];
       var cls = 'card-tag';
       if (t === '男の子') cls += ' boy';
       if (t === '女の子') cls += ' girl';
-      return '<span class="' + cls + '">' + t + '</span>';
-    }).join('');
-    return `<div class="card" onclick="openModal('${img.id}')">
-      <div class="card-img">
-        <img src="${BASE_URL + img.file}" alt="${img.title}" loading="lazy" onerror="this.style.display='none'">
-      </div>
-      <div class="card-body">
-        <div class="card-title">${img.title}</div>
-        <div class="card-category">${img.category}</div>
-        <div class="card-tags">${tagHtml}</div>
-      </div>
-    </div>`;
-  }).join('');
+      tagHtml += '<span class="' + cls + '">' + t + '</span>';
+    }
+    html += '<div class="card" onclick="openModal(\'' + img.id + '\')">' +
+      '<div class="card-img"><img src="' + BASE_URL + img.file + '" alt="' + img.title + '" loading="lazy"></div>' +
+      '<div class="card-body">' +
+      '<div class="card-title">' + img.title + '</div>' +
+      '<div class="card-category">' + img.category + '</div>' +
+      '<div class="card-tags">' + tagHtml + '</div>' +
+      '</div></div>';
+  }
+  gallery.innerHTML = html;
 }
 
 function openModal(id) {
-  var img = allImages.find(function(i) { return i.id === id; });
+  var img = null;
+  for (var i = 0; i < allImages.length; i++) {
+    if (allImages[i].id === id) { img = allImages[i]; break; }
+  }
   if (!img) return;
 
   document.getElementById('modalImg').src = BASE_URL + img.file;
@@ -560,24 +464,22 @@ function openModal(id) {
   document.getElementById('modalTitle').textContent = img.title;
   document.getElementById('modalMeta').textContent = img.category + '　／　' + img.id;
 
-  var tagsHtml = img.tags.map(function(t) {
+  var tagsHtml = '';
+  for (var i = 0; i < img.tags.length; i++) {
+    var t = img.tags[i];
     var cls = 'modal-tag';
     if (t === '男の子') cls += ' boy';
     if (t === '女の子') cls += ' girl';
-    return '<span class="' + cls + '">' + t + '</span>';
-  }).join('');
+    tagsHtml += '<span class="' + cls + '">' + t + '</span>';
+  }
   document.getElementById('modalTags').innerHTML = tagsHtml;
 
   var pngUrl = BASE_URL + img.file;
   var pdfUrl = BASE_URL + img.file.replace('images/', 'pdf/').replace('.png', '.pdf');
-
+  var dlIcon = '<svg class="dl-btn-icon" viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 4h14v-2H5v2z"/></svg>';
   document.getElementById('modalButtons').innerHTML =
-    '<a class="dl-btn dl-btn-png" href="' + pngUrl + '" download="' + img.id + '.png">' +
-    '<svg class="dl-btn-icon" viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 4h14v-2H5v2z"/></svg>' +
-    'PNG をダウンロード</a>' +
-    '<a class="dl-btn dl-btn-pdf" href="' + pdfUrl + '" download="' + img.id + '.pdf">' +
-    '<svg class="dl-btn-icon" viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 4h14v-2H5v2z"/></svg>' +
-    'PDF をダウンロード</a>';
+    '<a class="dl-btn dl-btn-png" href="' + pngUrl + '" download="' + img.id + '.png">' + dlIcon + 'PNG をダウンロード</a>' +
+    '<a class="dl-btn dl-btn-pdf" href="' + pdfUrl + '" download="' + img.id + '.pdf">' + dlIcon + 'PDF をダウンロード</a>';
 
   document.getElementById('modalBg').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -589,7 +491,9 @@ function closeModal(e) {
   document.body.style.overflow = '';
 }
 
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
 
 loadData();
 </script>
