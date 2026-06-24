@@ -26,5 +26,159 @@
     "title": "標準ポーズ 女の子02",
     "category": "標準ポーズ",
     "tags": ["女の子", "立ち", "標準"]
+  },
+  {
+    "id": "A-2-B01",
+    "file": "images/A-2-B01.png",
+    "title": "標準ポーズ・冬 男の子01",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "立ち", "冬"]
+  },
+  {
+    "id": "A-2-B02",
+    "file": "images/A-2-B02.png",
+    "title": "標準ポーズ・冬 男の子02",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "立ち", "冬"]
+  },
+  {
+    "id": "A-2-G01",
+    "file": "images/A-2-G01.png",
+    "title": "標準ポーズ・冬 女の子01",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "立ち", "冬"]
+  },
+  {
+    "id": "A-2-G02",
+    "file": "images/A-2-G02.png",
+    "title": "標準ポーズ・冬 女の子02",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "立ち", "冬"]
+  },
+  {
+    "id": "A-3-B01",
+    "file": "images/A-3-B01.png",
+    "title": "標準ポーズ・冬 男の子03",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "立ち", "冬"]
+  },
+  {
+    "id": "A-3-B02",
+    "file": "images/A-3-B02.png",
+    "title": "標準ポーズ・冬 男の子04",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "立ち", "冬"]
+  },
+  {
+    "id": "A-3-G01",
+    "file": "images/A-3-G01.png",
+    "title": "標準ポーズ・冬 女の子03",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "立ち", "冬"]
+  },
+  {
+    "id": "A-3-G02",
+    "file": "images/A-3-G02.png",
+    "title": "標準ポーズ・冬 女の子04",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "立ち", "冬"]
+  },
+  {
+    "id": "A-4-B01",
+    "file": "images/A-4-B01.png",
+    "title": "標準ポーズ・春秋 男の子01",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "立ち", "春", "秋"]
+  },
+  {
+    "id": "A-4-B02",
+    "file": "images/A-4-B02.png",
+    "title": "標準ポーズ・春秋 男の子02",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "立ち", "春", "秋"]
+  },
+  {
+    "id": "A-4-B03",
+    "file": "images/A-4-B03.png",
+    "title": "標準ポーズ・春秋 男の子03",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "立ち", "春", "秋"]
+  },
+  {
+    "id": "A-4-G01",
+    "file": "images/A-4-G01.png",
+    "title": "標準ポーズ・春秋 女の子01",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "立ち", "春", "秋"]
+  },
+  {
+    "id": "A-4-G02",
+    "file": "images/A-4-G02.png",
+    "title": "標準ポーズ・春秋 女の子02",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "立ち", "春", "秋"]
+  },
+  {
+    "id": "A-4-G03",
+    "file": "images/A-4-G03.png",
+    "title": "標準ポーズ・春秋 女の子03",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "立ち", "春", "秋"]
+  },
+  {
+    "id": "A-5-B01",
+    "file": "images/A-5-B01.png",
+    "title": "標準ポーズ・給食 男の子01",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "給食"]
+  },
+  {
+    "id": "A-5-B02",
+    "file": "images/A-5-B02.png",
+    "title": "標準ポーズ・給食 男の子02",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "給食"]
+  },
+  {
+    "id": "A-5-G01",
+    "file": "images/A-5-G01.png",
+    "title": "標準ポーズ・給食 女の子01",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "給食"]
+  },
+  {
+    "id": "A-5-G02",
+    "file": "images/A-5-G02.png",
+    "title": "標準ポーズ・給食 女の子02",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "給食"]
+  },
+  {
+    "id": "A-6-B01",
+    "file": "images/A-6-B01.png",
+    "title": "標準ポーズ・体育 男の子01",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "体育"]
+  },
+  {
+    "id": "A-6-B02",
+    "file": "images/A-6-B02.png",
+    "title": "標準ポーズ・体育 男の子02",
+    "category": "標準ポーズ",
+    "tags": ["男の子", "体育"]
+  },
+  {
+    "id": "A-6-G01",
+    "file": "images/A-6-G01.png",
+    "title": "標準ポーズ・体育 女の子01",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "体育"]
+  },
+  {
+    "id": "A-6-G02",
+    "file": "images/A-6-G02.png",
+    "title": "標準ポーズ・体育 女の子02",
+    "category": "標準ポーズ",
+    "tags": ["女の子", "体育"]
   }
 ]
