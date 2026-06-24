@@ -405,7 +405,7 @@
 <div class="active-filters" id="activeFilters" style="display:none; padding: 0.5rem 2rem; background:#faf9f6; border-bottom:1px solid #e0ddd6; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
   <span style="font-size:0.78rem; color:#888;">絞り込み中：</span>
   <span id="activeFilterTags" style="display:flex; gap:0.4rem; flex-wrap:wrap;"></span>
-  <button onclick="clearAllFilters()" style="margin-left:auto; background:transparent; border:1px solid #d0cdc6; border-radius:20px; padding:0.3rem 0.9rem; font-size:0.78rem; color:#888; cursor:pointer; font-family:inherit; white-space:nowrap;" onmouseover="this.style.borderColor='#c0392b';this.style.color='#c0392b'" onmouseout="this.style.borderColor='#d0cdc6';this.style.color='#888'">✕ フィルターをすべて解除</button>
+  <button onclick="clearAllFilters()" style="margin-left:auto; background:transparent; border:1px solid #d0cdc6; border-radius:20px; padding:0.3rem 0.9rem; font-size:0.78rem; color:#888; cursor:pointer;">すべてクリア</button>
 </div>
 <div class="result-info" id="resultInfo"></div>
 
@@ -538,15 +538,16 @@ function renderGallery(images) {
       if (t === '女の子') cls += ' girl';
       return '<span class="' + cls + '">' + t + '</span>';
     }).join('');
-    return '<div class="card" onclick="openModal('' + img.id + '')">' +
-      '<div class="card-img">' +
-      '<img src="' + BASE_URL + img.file + '" alt="' + img.title + '" loading="lazy" onerror="this.style.display='none'">' +
-      '</div>' +
-      '<div class="card-body">' +
-      '<div class="card-title">' + img.title + '</div>' +
-      '<div class="card-category">' + img.category + '</div>' +
-      '<div class="card-tags">' + tagHtml + '</div>' +
-      '</div></div>';
+    return `<div class="card" onclick="openModal('${img.id}')">
+      <div class="card-img">
+        <img src="${BASE_URL + img.file}" alt="${img.title}" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="card-body">
+        <div class="card-title">${img.title}</div>
+        <div class="card-category">${img.category}</div>
+        <div class="card-tags">${tagHtml}</div>
+      </div>
+    </div>`;
   }).join('');
 }
 
