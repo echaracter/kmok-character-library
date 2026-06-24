@@ -399,10 +399,14 @@
   <span class="tag-label">種類：</span>
   <button class="tag-btn" onclick="setTag('標準', this)">標準</button>
   <button class="tag-btn" onclick="setTag('動き', this)">動き</button>
-  <button class="tag-btn" onclick="setTag('別バージョン', this)">別バージョン</button>
   <button class="tag-btn" onclick="setTag('線画', this)">線画</button>
 </div>
 
+<div class="active-filters" id="activeFilters" style="display:none; padding: 0.5rem 2rem; background:#faf9f6; border-bottom:1px solid #e0ddd6; display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+  <span style="font-size:0.78rem; color:#888;">絞り込み中：</span>
+  <span id="activeFilterTags" style="display:flex; gap:0.4rem; flex-wrap:wrap;"></span>
+  <button onclick="clearAllFilters()" style="margin-left:auto; background:transparent; border:1px solid #d0cdc6; border-radius:20px; padding:0.3rem 0.9rem; font-size:0.78rem; color:#888; cursor:pointer; font-family:inherit; white-space:nowrap;" onmouseover="this.style.borderColor='#c0392b';this.style.color='#c0392b'" onmouseout="this.style.borderColor='#d0cdc6';this.style.color='#888'">✕ フィルターをすべて解除</button>
+</div>
 <div class="result-info" id="resultInfo"></div>
 
 <!-- ギャラリーグリッド -->
@@ -506,6 +510,38 @@ function setTag(tag, btn) {
   applyFilters();
 }
 
+// ===== フィルター全解除 =====
+function clearAllFilters() {
+  selectedTags.clear();
+  currentCategory = 'すべて';
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.filter-btn[onclick="setCategory('すべて', this)"]').classList.add('active');
+  document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.tag-btn[onclick="setTag('すべて', this)"]').classList.add('active');
+  document.getElementById('searchInput').value = '';
+  applyFilters();
+}
+
+// ===== アクティブフィルター表示更新 =====
+function updateActiveFilters() {
+  const bar = document.getElementById('activeFilters');
+  const tagsEl = document.getElementById('activeFilterTags');
+  const chips = [];
+  if (currentCategory !== 'すべて') chips.push({ label: currentCategory, type: 'cat' });
+  selectedTags.forEach(t => chips.push({ label: t, type: 'tag' }));
+  const kw = document.getElementById('searchInput').value.trim();
+  if (kw) chips.push({ label: '「' + kw + '」', type: 'kw' });
+
+  if (chips.length === 0) {
+    bar.style.display = 'none';
+    return;
+  }
+  bar.style.display = 'flex';
+  tagsEl.innerHTML = chips.map(c =>
+    \`<span style="background:#EAF3DE;color:#3B6D11;border-radius:10px;padding:0.15rem 0.65rem;font-size:0.75rem;font-weight:600;">\${c.label}</span>\`
+  ).join('');
+}
+
 // ===== フィルター適用 =====
 function applyFilters() {
   const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
@@ -521,6 +557,7 @@ function applyFilters() {
   });
 
   renderGallery(filtered);
+  updateActiveFilters();
   document.getElementById('resultInfo').textContent = `${filtered.length}件 表示中（全${allImages.length}件）`;
 }
 
