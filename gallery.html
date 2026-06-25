@@ -259,8 +259,8 @@ header a:hover { color: #3B6D11; }
   <div class="tag-row">
     <span class="tag-label">キャラクター：</span>
     <button id="tagAll" class="tag-btn active" onclick="setTag('すべて', this)">すべて</button>
-    <button class="tag-btn" onclick="setTag('男の子', this)">男の子</button>
-    <button class="tag-btn" onclick="setTag('女の子', this)">女の子</button>
+    <button class="tag-btn" onclick="setTag('かめまる', this)">かめまる</button>
+    <button class="tag-btn" onclick="setTag('かめるん', this)">かめるん</button>
     <button class="tag-btn" onclick="setTag('ふたり', this)">ふたり</button>
     <button class="tag-btn" onclick="setTag('その他', this)">その他</button>
   </div>
@@ -437,8 +437,8 @@ function renderGallery(images) {
     for (var j = 0; j < img.tags.length; j++) {
       var t = img.tags[j];
       var cls = 'card-tag';
-      if (t === '男の子') cls += ' boy';
-      if (t === '女の子') cls += ' girl';
+      if (t === 'かめまる') cls += ' boy';
+      if (t === 'かめるん') cls += ' girl';
       tagHtml += '<span class="' + cls + '">' + t + '</span>';
     }
     html += '<div class="card" onclick="openModal(\'' + img.id + '\')">' +
@@ -468,8 +468,8 @@ function openModal(id) {
   for (var i = 0; i < img.tags.length; i++) {
     var t = img.tags[i];
     var cls = 'modal-tag';
-    if (t === '男の子') cls += ' boy';
-    if (t === '女の子') cls += ' girl';
+    if (t === 'かめまる') cls += ' boy';
+    if (t === 'かめるん') cls += ' girl';
     tagsHtml += '<span class="' + cls + '">' + t + '</span>';
   }
   document.getElementById('modalTags').innerHTML = tagsHtml;
