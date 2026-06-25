@@ -1,15 +1,198 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>かめまるとかめるんのライブラリ</title>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>echaracter イラスト素材</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    body {
+      font-family: 'Hiragino Maru Gothic Pro', 'BIZ UDPGothic', sans-serif;
+      background: #FFF6F9;
+      color: #3a2030;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #F4C0D1;
+      background: #fff;
+    }
+
+    header span {
+      font-size: 14px;
+      color: #993556;
+      letter-spacing: 0.08em;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      max-width: 640px;
+      width: 100%;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #FBEAF0;
+      color: #993556;
+      font-size: 12px;
+      padding: 4px 16px;
+      border-radius: 99px;
+      border: 1px solid #F4C0D1;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.06em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #72243E;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .tagline {
+      font-size: 15px;
+      color: #b07090;
+      margin-bottom: 2rem;
+    }
+
+    .desc-box {
+      background: #fff;
+      border: 1px solid #F4C0D1;
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2.5rem;
+      font-size: 14px;
+      line-height: 2;
+      color: #5a3045;
+      max-width: 460px;
+    }
+
+    .category-row {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .cat-card {
+      background: #fff;
+      border: 1px solid #F4C0D1;
+      border-radius: 14px;
+      width: 110px;
+      padding: 1rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cat-icon {
+      font-size: 2rem;
+    }
+
+    .cat-label {
+      font-size: 12px;
+      color: #993556;
+      font-weight: 600;
+    }
+
+    .btn-gallery {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #D4537E;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 0.85rem 2.8rem;
+      border-radius: 99px;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-gallery:hover {
+      background: #993556;
+      transform: scale(1.03);
+    }
+
+    .btn-gallery::after {
+      content: '→';
+      font-size: 18px;
+    }
+
+    footer {
+      width: 100%;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 12px;
+      color: #c0a0b0;
+      border-top: 1px solid #F4C0D1;
+      background: #fff;
+    }
+  </style>
+</head>
 <body>
 
-<h1>かめまるとかめるんの素材ライブラリ</h1>
+  <header>
+    <span>echaracter — original illustrations</span>
+  </header>
 
-<img src="images/A-1-B01.png" width="300">
+  <main>
+    <div class="badge">フリー素材</div>
+
+    <h1>亀阜小学校キャラクター<br>イラスト素材</h1>
+    <p class="tagline">フリーで使えるオリジナルキャラクターイラスト</p>
+
+    <div class="desc-box">
+      亀阜小学校創立150周年を機に生まれたキャラクターの素材集です<br>。
+      学校イベントなどで自由にお使いいただけます<br>
+      標準ポーズ・動きのあるポーズ・学校行事など<br>
+      さまざまなシーンに合わせてご活用ください。<br>
+      学校関係者以外の方のダウンロードはご遠慮ください。
+    </div>
+
+    <div class="category-row">
+      <div class="cat-card">
+        <span class="cat-icon">🧍</span>
+        <span class="cat-label">標準ポーズ</span>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">🏃</span>
+        <span class="cat-label">動きのある</span>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">🏫</span>
+        <span class="cat-label">学校行事</span>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">🎨</span>
+        <span class="cat-label">テーマ</span>
+      </div>
+    </div>
+
+    <a class="btn-gallery" href="gallery.html">ギャラリーを見る</a>
+  </main>
+
+  <footer>
+    © echaracter — 亀阜小学校に関わる資料・印刷物・刊行物にご利用いただけます
+  </footer>
 
 </body>
 </html>
